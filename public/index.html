@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เข้าสู่ระบบ</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="card">
+    <div class="brand-mark" aria-hidden="true">L</div>
+    <p class="eyebrow">บัญชีของคุณ</p>
+    <h1 id="heading">ยินดีต้อนรับ</h1>
+    <p id="subheading" class="muted">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+
+    <section id="auth-panel">
+      <div class="tabs" role="tablist" aria-label="เลือกการใช้งาน">
+        <button class="tab active" id="login-tab" type="button">เข้าสู่ระบบ</button>
+        <button class="tab" id="register-tab" type="button">สร้างบัญชี</button>
+      </div>
+      <form id="auth-form">
+        <label for="email">อีเมล</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required maxlength="254">
+        <label id="name-label" for="displayName" hidden>ชื่อที่แสดง</label>
+        <input id="displayName" name="displayName" type="text" autocomplete="name" placeholder="ชื่อของคุณ" maxlength="100" hidden>
+        <label for="password">รหัสผ่าน</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="อย่างน้อย 8 ตัวอักษร" required minlength="8" maxlength="128">
+        <button class="submit" id="submit" type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="account-panel" hidden>
+      <div class="welcome-icon" aria-hidden="true">✓</div>
+      <p class="muted">เข้าสู่ระบบแล้วในชื่อ</p>
+      <p id="account-name" class="account-name"></p>
+      <p id="account-email" class="muted"></p>
+      <button id="logout" class="submit secondary" type="button">ออกจากระบบ</button>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
