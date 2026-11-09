@@ -172,6 +172,22 @@ input:focus {
   font-weight: 700;
 }
 
+.role-badge {
+  display: inline-block;
+  margin: 14px 0 0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #52645a;
+  background: #eef2ef;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  color: #205e3c;
+  background: #e6f3e9;
+}
+
 .welcome-icon {
   display: grid;
   width: 48px;

@@ -71,7 +71,8 @@ function formatUser(user) {
   return {
     id: user.id,
     email: user.email,
-    displayName: user.display_name ?? user.displayName ?? null
+    displayName: user.display_name ?? user.displayName ?? null,
+    role: user.role || 'user'
   };
 }
 
@@ -92,7 +93,7 @@ async function createSession(userId, res) {
 
 async function findSessionUser(token) {
   const [users] = await pool.execute(
-    `SELECT u.id, u.email, u.display_name
+    `SELECT u.id, u.email, u.display_name, u.role
        FROM auth_sessions AS s
        JOIN users AS u ON u.id = s.user_id
       WHERE s.token_hash = ?
@@ -134,7 +135,7 @@ app.post('/api/register', asyncHandler(async (req, res) => {
 
     await createSession(result.insertId, res);
     return res.status(201).json({
-      user: formatUser({ id: result.insertId, email, displayName })
+      user: formatUser({ id: result.insertId, email, displayName, role: 'user' })
     });
   } catch (error) {
     if (error.code === 'ER_DUP_ENTRY') {
@@ -153,7 +154,7 @@ app.post('/api/login', asyncHandler(async (req, res) => {
   }
 
   const [users] = await pool.execute(
-    `SELECT id, email, password_hash, display_name, is_active
+    `SELECT id, email, password_hash, display_name, role, is_active
        FROM users
       WHERE email = ?
       LIMIT 1`,

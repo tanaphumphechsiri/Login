@@ -13,6 +13,7 @@ const elements = {
   subheading: document.querySelector('#subheading'),
   accountName: document.querySelector('#account-name'),
   accountEmail: document.querySelector('#account-email'),
+  accountRole: document.querySelector('#account-role'),
   logout: document.querySelector('#logout')
 };
 
@@ -43,6 +44,8 @@ function showAccount(user) {
   elements.subheading.textContent = 'ยินดีที่ได้พบคุณอีกครั้ง';
   elements.accountName.textContent = user.displayName || user.email;
   elements.accountEmail.textContent = user.email;
+  elements.accountRole.textContent = user.role === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน';
+  elements.accountRole.classList.toggle('admin', user.role === 'admin');
 }
 
 function showLoginForm() {
