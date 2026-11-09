@@ -43,7 +43,7 @@ function showAccount(user) {
   elements.heading.textContent = 'คุณเข้าสู่ระบบแล้ว';
   elements.subheading.textContent = 'ยินดีที่ได้พบคุณอีกครั้ง';
   elements.accountName.textContent = user.displayName || user.email;
-  elements.accountEmail.textContent = user.email;
+  if (elements.accountEmail) elements.accountEmail.textContent = user.email;
   elements.accountRole.textContent = user.role === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน';
   elements.accountRole.classList.toggle('admin', user.role === 'admin');
 }
@@ -97,7 +97,7 @@ elements.logout.addEventListener('click', async () => {
     await request('/api/logout', { method: 'POST' });
     showLoginForm();
   } catch (error) {
-    elements.accountEmail.textContent = error.message;
+    if (elements.accountEmail) elements.accountEmail.textContent = error.message;
   }
 });
 
