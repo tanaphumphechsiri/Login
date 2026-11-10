@@ -5,6 +5,8 @@ const elements = {
   displayName: document.querySelector('#displayName'),
   nameLabel: document.querySelector('#name-label'),
   password: document.querySelector('#password'),
+  rememberRow: document.querySelector('#remember-row'),
+  rememberMe: document.querySelector('#rememberMe'),
   submit: document.querySelector('#submit'),
   message: document.querySelector('#message'),
   authPanel: document.querySelector('#auth-panel'),
@@ -28,6 +30,7 @@ function setMode(nextMode) {
   elements.nameLabel.hidden = !isRegistering;
   elements.displayName.hidden = !isRegistering;
   elements.displayName.required = isRegistering;
+  elements.rememberRow.hidden = isRegistering;
   elements.password.autocomplete = isRegistering ? 'new-password' : 'current-password';
   elements.heading.textContent = isRegistering ? 'สร้างบัญชีใหม่' : 'ยินดีต้อนรับ';
   elements.subheading.textContent = isRegistering
@@ -46,6 +49,14 @@ function showAccount(user) {
   if (elements.accountEmail) elements.accountEmail.textContent = user.email;
   elements.accountRole.textContent = user.role === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน';
   elements.accountRole.classList.toggle('admin', user.role === 'admin');
+}
+
+function continueAs(user) {
+  if (user.role === 'admin') {
+    window.location.assign('/admin');
+    return;
+  }
+  showAccount(user);
 }
 
 function showLoginForm() {
@@ -78,13 +89,14 @@ elements.form.addEventListener('submit', async (event) => {
     password: elements.password.value
   };
   if (mode === 'register') payload.displayName = elements.displayName.value;
+  else payload.rememberMe = elements.rememberMe.checked;
 
   try {
     const { user } = await request(`/api/${mode}`, {
       method: 'POST',
       body: JSON.stringify(payload)
     });
-    showAccount(user);
+    continueAs(user);
   } catch (error) {
     elements.message.textContent = error.message;
   } finally {
@@ -102,5 +114,5 @@ elements.logout.addEventListener('click', async () => {
 });
 
 request('/api/me')
-  .then(({ user }) => showAccount(user))
+  .then(({ user }) => continueAs(user))
   .catch(() => {});

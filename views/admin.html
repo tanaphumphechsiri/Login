@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>จัดการผู้ใช้ | Admin</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="เปิดโหมดกลางคืน" aria-pressed="false" title="สลับโหมดกลางคืน">
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M20.4 15.4A8.5 8.5 0 0 1 8.6 3.6 8.6 8.6 0 1 0 20.4 15.4Z" />
+    </svg>
+  </button>
+  <main class="admin-card">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">ADMIN</p>
+        <h1>จัดการผู้ใช้</h1>
+        <p class="muted">จัดการบัญชี user ทั่วไปและสิทธิ์การใช้งาน</p>
+      </div>
+      <span class="role-chip">ผู้ดูแลระบบ</span>
+    </header>
+
+    <section class="admin-profile" aria-live="polite">
+      <p>เข้าสู่ระบบในชื่อ <strong id="admin-name">ผู้ดูแลระบบ</strong></p>
+      <p id="admin-email" class="muted"></p>
+    </section>
+
+    <section class="users-section" aria-labelledby="users-title">
+      <div class="users-heading">
+        <div>
+          <h2 id="users-title">บัญชีในระบบ</h2>
+          <p class="muted">จัดการ user และตรวจสอบบัญชี admin</p>
+        </div>
+        <span id="user-count" class="user-count">0 บัญชี</span>
+      </div>
+      <p id="users-message" class="users-message" role="status" aria-live="polite">กำลังโหลดรายชื่อ...</p>
+      <ul id="users-list" class="users-list"></ul>
+    </section>
+
+    <section class="users-section deleted-section" aria-labelledby="deleted-title">
+      <div class="users-heading">
+        <div>
+          <h2 id="deleted-title">บัญชีที่ลบแล้ว</h2>
+          <p class="muted">กู้คืนได้ภายใน 30 วัน หลังจากนั้นระบบจะลบข้อมูลถาวร</p>
+        </div>
+        <span id="deleted-count" class="user-count">0 บัญชี</span>
+      </div>
+      <p id="deleted-message" class="users-message" role="status" aria-live="polite">กำลังโหลดรายการ...</p>
+      <ul id="deleted-list" class="users-list"></ul>
+    </section>
+
+    <button id="logout" class="submit secondary" type="button">ออกจากระบบ</button>
+  </main>
+  <script src="/theme.js" defer></script>
+  <script src="/admin.js" defer></script>
+</body>
+</html>

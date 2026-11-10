@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="เปิดโหมดกลางคืน" aria-pressed="false" title="สลับโหมดกลางคืน">
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M20.4 15.4A8.5 8.5 0 0 1 8.6 3.6 8.6 8.6 0 1 0 20.4 15.4Z" />
+    </svg>
+  </button>
   <main class="card">
     <div class="brand-mark" aria-hidden="true">L</div>
     <p class="eyebrow">บัญชีของคุณ</p>
@@ -25,6 +30,10 @@
         <input id="displayName" name="displayName" type="text" autocomplete="name" placeholder="ชื่อของคุณ" maxlength="100" hidden>
         <label for="password">รหัสผ่าน</label>
         <input id="password" name="password" type="password" autocomplete="current-password" placeholder="อย่างน้อย 8 ตัวอักษร" required minlength="8" maxlength="128">
+        <label id="remember-row" class="remember-row" for="rememberMe">
+          <input id="rememberMe" name="rememberMe" type="checkbox">
+          <span>จดจำฉันไว้</span>
+        </label>
         <button class="submit" id="submit" type="submit">เข้าสู่ระบบ</button>
       </form>
       <p id="message" class="message" role="status" aria-live="polite"></p>
@@ -33,11 +42,12 @@
     <section id="account-panel" hidden>
       <div class="welcome-icon" aria-hidden="true">✓</div>
       <p id="account-name" class="account-name"></p>
-      <!-- <p id="account-email" class="muted"></p> -->
+      <p id="account-email" class="muted"></p>
       <p id="account-role" class="role-badge"></p>
       <button id="logout" class="submit secondary" type="button">ออกจากระบบ</button>
     </section>
   </main>
+  <script src="/theme.js" defer></script>
   <script src="/app.js" defer></script>
 </body>
 </html>

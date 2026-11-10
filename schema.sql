@@ -19,6 +19,35 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY (id),
   UNIQUE KEY uq_users_email (email)
 ) ENGINE=InnoDB;
+
+-- Track which administrator granted another account the admin role.
+-- Existing administrators without a grant record are original admins.
+CREATE TABLE IF NOT EXISTS admin_role_grants (
+  user_id BIGINT UNSIGNED NOT NULL,
+  granted_by BIGINT UNSIGNED NOT NULL,
+  granted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id),
+  KEY ix_admin_role_grants_granted_by (granted_by),
+  CONSTRAINT fk_admin_role_grants_user
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  CONSTRAINT fk_admin_role_grants_grantor
+    FOREIGN KEY (granted_by) REFERENCES users (id) ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- Keep deleted user accounts for 30 days so admins can restore them.
+CREATE TABLE IF NOT EXISTS deleted_user_accounts (
+  user_id BIGINT UNSIGNED NOT NULL,
+  deleted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_by BIGINT UNSIGNED NULL,
+  PRIMARY KEY (user_id),
+  KEY ix_deleted_user_accounts_deleted_at (deleted_at),
+  KEY ix_deleted_user_accounts_deleted_by (deleted_by),
+  CONSTRAINT fk_deleted_user_accounts_user
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  CONSTRAINT fk_deleted_user_accounts_deleted_by
+    FOREIGN KEY (deleted_by) REFERENCES users (id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
 -- Store only a cryptographic hash of each random session token.
 CREATE TABLE IF NOT EXISTS auth_sessions (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

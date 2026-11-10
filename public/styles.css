@@ -23,6 +23,34 @@ body {
     #f7f9f7;
 }
 
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 10;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid #dce5de;
+  border-radius: 50%;
+  color: #33483a;
+  background: #fff;
+  box-shadow: 0 4px 14px #193a2810;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: #f3f7f3;
+}
+
+.theme-toggle svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
 .card {
   width: min(100%, 430px);
   padding: 42px 42px 26px;
@@ -131,6 +159,25 @@ input:focus {
   box-shadow: 0 0 0 3px #39855a19;
 }
 
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 8px 0 0;
+  color: #52645a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.remember-row input {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  accent-color: #287149;
+}
+
 .submit {
   width: 100%;
   height: 47px;
@@ -222,6 +269,105 @@ input:focus {
 
 [hidden] {
   display: none !important;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+  color: #e7eee9;
+  background:
+    radial-gradient(ellipse at 15% 10%, #243a2c 0, transparent 38%),
+    radial-gradient(ellipse at 90% 85%, #202e26 0, transparent 33%),
+    #121814;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .admin-card {
+  border-color: #354239;
+  background: #1b241f;
+  box-shadow: 0 24px 80px #0005, 0 3px 12px #0003;
+}
+
+html[data-theme="dark"] .muted {
+  color: #aab8ae;
+}
+
+html[data-theme="dark"] .eyebrow {
+  color: #8fc69d;
+}
+
+html[data-theme="dark"] label {
+  color: #d0dbd3;
+}
+
+html[data-theme="dark"] .remember-row {
+  color: #d0dbd3;
+}
+
+html[data-theme="dark"] input {
+  border-color: #46564b;
+  color: #e7eee9;
+  background: #151c18;
+}
+
+html[data-theme="dark"] input::placeholder {
+  color: #839188;
+}
+
+html[data-theme="dark"] .tabs {
+  background: #141b17;
+}
+
+html[data-theme="dark"] .tab {
+  color: #aab8ae;
+}
+
+html[data-theme="dark"] .tab.active {
+  color: #e7eee9;
+  background: #27332b;
+  box-shadow: 0 1px 4px #0004;
+}
+
+html[data-theme="dark"] .role-badge {
+  color: #cad6cd;
+  background: #303c34;
+}
+
+html[data-theme="dark"] .role-badge.admin {
+  color: #a6d8b1;
+  background: #254330;
+}
+
+html[data-theme="dark"] .welcome-icon {
+  color: #a6d8b1;
+  background: #254330;
+}
+
+html[data-theme="dark"] .secondary {
+  border-color: #46564b;
+  color: #d0dbd3;
+  background: #202a23;
+}
+
+html[data-theme="dark"] .secondary:hover {
+  background: #2a362e;
+}
+
+html[data-theme="dark"] .footnote {
+  border-color: #354239;
+  color: #94a197;
+}
+
+html[data-theme="dark"] .theme-toggle {
+  border-color: #46564b;
+  color: #e3c875;
+  background: #202a23;
+}
+
+html[data-theme="dark"] .theme-toggle:hover {
+  background: #2a362e;
 }
 
 @media (max-width: 480px) {
